@@ -1,0 +1,6 @@
+Qwen3-VL-2B-Instruct-GGUF
+Model repository: https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct-GGUF
+The model repository metadata declares Apache-2.0. Retain the upstream license and attribution for redistribution. This project does not claim ownership of the model weights.
+
+Runtime: llama.cpp by ggml-org, https://github.com/ggml-org/llama.cpp
+The installer obtains an official release archive. Keep the license/NOTICE files included in that runtime archive when redistributing it.

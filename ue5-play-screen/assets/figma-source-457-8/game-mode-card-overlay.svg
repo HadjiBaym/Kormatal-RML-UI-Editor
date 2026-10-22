@@ -1,0 +1,18 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="398" height="210" viewBox="0 0 398 210" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="GameModeCard_BackgroundOverlay">
+<use xlink:href="#stroke0_0_31" fill="url(#paint0_linear_0_31)"/>
+<use xlink:href="#stroke0_0_31" fill="url(#paint1_radial_0_31)"/>
+<path d="M0.5 0.5H397.5V209.5H0.5V0.5Z" stroke="#3C4545"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_31" x1="199" y1="0" x2="199" y2="210" gradientUnits="userSpaceOnUse">
+<stop stop-color="#666666" stop-opacity="0"/>
+<stop offset="1"/>
+</linearGradient>
+<radialGradient id="paint1_radial_0_31" cx="0" cy="0" r="1" gradientTransform="matrix(33.4902 -219.5 416.005 67.3571 464.01 54.5)" gradientUnits="userSpaceOnUse">
+<stop stop-opacity="0"/>
+<stop offset="1" stop-color="#040A0D" stop-opacity="0.97"/>
+</radialGradient>
+<path id="stroke0_0_31" d="M398 0H0V210H398V0Z"/>
+</defs>
+</svg>

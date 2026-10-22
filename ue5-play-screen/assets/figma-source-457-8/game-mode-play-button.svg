@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="398" height="70" viewBox="0 0 398 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path id="GameMode_PlayButtonBorder" d="M0.5 0.5H397.5V69.5H0.5V0.5Z" fill="url(#paint0_radial_0_18)" stroke="#0CCEB9"/>
+<defs>
+<radialGradient id="paint0_radial_0_18" cx="0" cy="0" r="1" gradientTransform="matrix(381.498 0.479449 -0.589613 457.793 199 35)" gradientUnits="userSpaceOnUse">
+<stop stop-color="#042823"/>
+<stop offset="1" stop-color="#044F46"/>
+</radialGradient>
+</defs>
+</svg>

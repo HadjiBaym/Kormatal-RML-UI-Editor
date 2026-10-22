@@ -1,0 +1,194 @@
+<rml>
+<head>
+	<title>Menu Play</title>
+	<link type="text/rcss" href="vacuus-base.rcss"/>
+	<link type="text/rcss" href="play_menu.rcss"/>
+	<script src="play_menu.js"></script>
+</head>
+<body>
+	<div id="play-screen">
+		<div id="topbar">
+			<img id="brand-mark" src="assets/LamguardLogo.png"/>
+
+			<nav id="main-nav">
+				<div id="nav-play" class="nav-item active" onclick="PlayMenu.navigate('play')">PLAY</div>
+				<div id="nav-inventory" class="nav-item" onclick="PlayMenu.navigate('inventory')">INVENTORY</div>
+				<div id="nav-clan" class="nav-item" onclick="PlayMenu.navigate('clan')">CLAN</div>
+				<div id="nav-store" class="nav-item" onclick="PlayMenu.navigate('store')">STORE</div>
+				<div id="nav-profile" class="nav-item" onclick="PlayMenu.navigate('profile')">PROFILE</div>
+				<div id="nav-settings" class="nav-item" onclick="PlayMenu.navigate('settings')">SETTINGS</div>
+				<div id="nav-active-line"/>
+			</nav>
+
+			<div id="player-identity">
+				<div id="player-clan">Bermood</div>
+				<div id="player-nickname">Metascript</div>
+			</div>
+			<div id="identity-divider"/>
+			<img id="player-rang" src="assets/player_rang.png"/>
+		</div>
+
+		<div id="mode-card">
+			<div id="mode-art-viewport">
+				<img id="mode-art" src="assets/game-mode-background.png"/>
+			</div>
+			<img id="mode-card-overlay" src="assets/game-mode-card.png"/>
+			<div id="mode-title">D17</div>
+			<div id="mode-subtitle">TEAM DEATHMATCH</div>
+
+			<div id="mode-stats">
+				<img id="stats-top-divider" class="mode-separator" src="assets/game-mode-separator.png"/>
+				<img id="stats-bottom-divider" class="mode-separator" src="assets/game-mode-separator.png"/>
+				<div id="stats-divider"/>
+				<div id="player-count">
+					<img src="assets/player-count-icon.png"/>
+					<span>12 VS 12</span>
+				</div>
+				<div id="match-duration">
+					<img src="assets/match-duration-icon.png"/>
+					<span>10 MIN</span>
+				</div>
+			</div>
+			<div id="change-mode" onclick="PlayMenu.openModeSelection()">
+				<span>CHANGE GAMEMODE</span>
+				<img src="assets/change-gamemode-icon.png"/>
+			</div>
+		</div>
+
+		<button id="mode-play-button" type="button" onclick="PlayMenu.startMatch()" aria-label="Play">
+			<img id="play-button-background" src="assets/game-mode-play-button.png"/>
+			<div id="play-button-hover"/>
+			<img id="play-hover-effect" src="assets/game-mode-play-hover-effect.png"/>
+			<span>PLAY</span>
+		</button>
+
+		<div id="quit-action" onclick="PlayMenu.quit()">QUIT</div>
+		<div id="bottom-actions">
+			<img src="assets/bottom-actions.png"/>
+			<div id="bottom-profile" class="utility-hitbox" onclick="PlayMenu.openUtility('profile')"/>
+			<div id="bottom-messages" class="utility-hitbox" onclick="PlayMenu.openUtility('messages')"/>
+			<div id="bottom-notifications" class="utility-hitbox" onclick="PlayMenu.openUtility('notifications')"/>
+		</div>
+
+		<div id="selection-backdrop"/>
+		<div id="game-mode-selection">
+			<div id="selection-header">
+				<div id="category-tabs">
+					<div id="category-pve" class="selection-tab" onclick="PlayMenu.setCategory('pve')">PVE</div>
+					<div id="category-ranked" class="selection-tab" onclick="PlayMenu.setCategory('ranked')">RANKED GAMES</div>
+					<div id="category-pvp" class="selection-tab active" onclick="PlayMenu.setCategory('pvp')">PVP</div>
+				</div>
+			</div>
+			<div id="selection-match-tabs">
+				<div id="quick-game-tab" class="match-tab active" onclick="PlayMenu.setMatchTab('quick_game')">QUICK GAME</div>
+				<div id="servers-tab" class="match-tab" onclick="PlayMenu.setMatchTab('servers')">SERVERS</div>
+			</div>
+
+			<div id="game-mode-filters">
+				<div id="filter-all" class="filter-row active" onclick="PlayMenu.setModeFilter('all')">
+					<span>ALL</span>
+					<div class="filter-play-control">
+						<div class="filter-play-fill"/>
+					<div class="filter-play-frame">
+						<div class="filter-play-frame-edge top"/>
+						<div class="filter-play-frame-edge right"/>
+						<div class="filter-play-frame-edge bottom"/>
+						<div class="filter-play-frame-edge left"/>
+					</div>
+						<div class="filter-play-label" onclick="PlayMenu.startModeFilter('all')">PLAY</div>
+					</div>
+				</div>
+				<div id="filter-free-for-all" class="filter-row" onclick="PlayMenu.setModeFilter('free_for_all')">
+					<span>FRE FOR ALL</span>
+					<div class="filter-play-control">
+						<div class="filter-play-fill"/>
+					<div class="filter-play-frame">
+						<div class="filter-play-frame-edge top"/>
+						<div class="filter-play-frame-edge right"/>
+						<div class="filter-play-frame-edge bottom"/>
+						<div class="filter-play-frame-edge left"/>
+					</div>
+						<div class="filter-play-label" onclick="PlayMenu.startModeFilter('free_for_all')">PLAY</div>
+					</div>
+				</div>
+				<div id="filter-team-deathmatch" class="filter-row" onclick="PlayMenu.setModeFilter('team_deathmatch')">
+					<span>TEAM DEATHMATCH</span>
+					<div class="filter-play-control">
+						<div class="filter-play-fill"/>
+					<div class="filter-play-frame">
+						<div class="filter-play-frame-edge top"/>
+						<div class="filter-play-frame-edge right"/>
+						<div class="filter-play-frame-edge bottom"/>
+						<div class="filter-play-frame-edge left"/>
+					</div>
+						<div class="filter-play-label" onclick="PlayMenu.startModeFilter('team_deathmatch')">PLAY</div>
+					</div>
+				</div>
+				<div id="filter-plant-the-bomb" class="filter-row" onclick="PlayMenu.setModeFilter('plant_the_bomb')">
+					<span>PLANT THE BOMB</span>
+					<div class="filter-play-control">
+						<div class="filter-play-fill"/>
+					<div class="filter-play-frame">
+						<div class="filter-play-frame-edge top"/>
+						<div class="filter-play-frame-edge right"/>
+						<div class="filter-play-frame-edge bottom"/>
+						<div class="filter-play-frame-edge left"/>
+					</div>
+						<div class="filter-play-label" onclick="PlayMenu.startModeFilter('plant_the_bomb')">PLAY</div>
+					</div>
+				</div>
+				<div id="filter-blitz" class="filter-row" onclick="PlayMenu.setModeFilter('blitz')">
+					<span>BLITZ</span>
+					<div class="filter-play-control">
+						<div class="filter-play-fill"/>
+					<div class="filter-play-frame">
+						<div class="filter-play-frame-edge top"/>
+						<div class="filter-play-frame-edge right"/>
+						<div class="filter-play-frame-edge bottom"/>
+						<div class="filter-play-frame-edge left"/>
+					</div>
+						<div class="filter-play-label" onclick="PlayMenu.startModeFilter('blitz')">PLAY</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="map-selection-grid" vacuus-interactive="">
+				<div id="map-list-content">
+				<div id="map-trailer-park" class="map-card" onclick="PlayMenu.selectMap('trailer_park','plant_the_bomb')">
+					<img class="map-thumbnail" src="assets/map-thumbnail-card.png"/>
+					<div class="map-card-heading"><span>TRAILER PARK</span><span>PLANT THE BOMB</span></div>
+				</div>
+				<div id="map-residential" class="map-card" onclick="PlayMenu.selectMap('residential','free_for_all')">
+					<img class="map-thumbnail" src="assets/map-thumbnail-card.png"/>
+					<div class="map-card-heading"><span>RESIDENTIAL</span><span>FREE FOR ALL</span></div>
+				</div>
+				<div id="map-oil-base" class="map-card" onclick="PlayMenu.selectMap('oil_base','team_deathmatch')">
+					<img class="map-thumbnail" src="assets/map-thumbnail-card.png"/>
+					<div class="map-card-heading"><span>OIL BASE</span><span>TEAM DEATHMATCH</span></div>
+				</div>
+				<div id="map-d17" class="map-card" onclick="PlayMenu.selectMap('d17','plant_the_bomb')">
+					<img class="map-thumbnail" src="assets/map-thumbnail-card.png"/>
+					<div class="map-card-heading"><span>D17</span><span>PLANT THE BOMB</span></div>
+				</div>
+				<div id="map-angar" class="map-card" onclick="PlayMenu.selectMap('angar','team_deathmatch')">
+					<img class="map-thumbnail" src="assets/map-thumbnail-card.png"/>
+					<div class="map-card-heading"><span>ANGAR</span><span>TEAM DEATHMATCH</span></div>
+				</div>
+				<div id="map-arctic" class="map-card" onclick="PlayMenu.selectMap('arctic','free_for_all')">
+					<img class="map-thumbnail" src="assets/map-thumbnail-card.png"/>
+					<div class="map-card-heading"><span>ARCTIC</span><span>FREE FOR ALL</span></div>
+				</div>
+				<div id="map-villa" class="map-card" onclick="PlayMenu.selectMap('villa','blitz')">
+					<img class="map-thumbnail" src="assets/map-thumbnail-card.png"/>
+					<div class="map-card-heading"><span>VILLA</span><span>BLITZ</span></div>
+				</div>
+				</div>
+			</div>
+			<div id="map-scroll-track" vacuus-interactive=""><div id="map-scroll-thumb"/></div>
+
+			<div id="selection-back" onclick="PlayMenu.closeModeSelection()">BACK</div>
+			<div id="private-room-button" onclick="PlayMenu.createPrivateRoom()">PRIVATE ROOM</div>
+		</div>
+	</div>
+</body>
+</rml>

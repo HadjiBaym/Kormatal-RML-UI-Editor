@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kormatal Layout Exporter</title>
+  <style>
+    :root { color-scheme: dark; font: 13px Inter, system-ui, sans-serif; background: var(--figma-color-bg, #202124); color: var(--figma-color-text, #f5f5f5); }
+    body { margin: 0; padding: 18px; }
+    h1 { font-size: 16px; margin: 0 0 8px; }
+    p { color: var(--figma-color-text-secondary, #a6a6a6); line-height: 1.5; }
+    .card { padding: 12px; border: 1px solid var(--figma-color-border, #414141); border-radius: 8px; margin: 14px 0; }
+    button { border: 0; border-radius: 6px; padding: 10px 12px; font-weight: 600; cursor: pointer; }
+    .primary { background: var(--figma-color-bg-brand, #0d99ff); color: white; width: 100%; }
+    .secondary { background: var(--figma-color-bg-secondary, #333); color: var(--figma-color-text, white); }
+    #status { font-size: 12px; min-height: 20px; overflow-wrap: anywhere; }
+    .ok { color: #86efac; } .error { color: #fca5a5; }
+    footer { display: flex; justify-content: flex-end; margin-top: 16px; }
+    #result { display: none; }
+    textarea { width: 100%; height: 82px; margin-top: 8px; resize: vertical; box-sizing: border-box; border: 1px solid var(--figma-color-border, #414141); border-radius: 6px; padding: 8px; background: var(--figma-color-bg-secondary, #282828); color: var(--figma-color-text, #fff); font: 10px ui-monospace, monospace; }
+  </style>
+</head>
+<body>
+  <h1>Kormatal Layout Exporter</h1>
+  <p>Экспортирует выбранные Frame/Component в переносимый JSON для Layout Generator: дерево и координаты, текстовые стили, PNG-эталон экрана и PNG-ресурсы для векторов, изображений и сложных заливок.</p>
+  <div class="card">
+    <strong>Перед экспортом</strong>
+    <p>Выберите один или несколько целых Frame на холсте. PNG-слои и эталон включаются в JSON автоматически; лимит экспортного файла — 10 МБ.</p>
+  </div>
+  <button id="export" class="primary">Экспортировать выбранные Frame</button>
+  <p id="status" role="status">Ожидание выбора в Figma…</p>
+  <section id="result" class="card"><strong>JSON готов</strong><textarea id="json" readonly aria-label="JSON для копирования"></textarea><div style="display:flex;gap:8px;margin-top:8px"><button id="download" class="primary">Скачать JSON</button><button id="copy" class="secondary">Копировать</button></div></section>
+  <footer><button id="close" class="secondary">Закрыть</button></footer>
+  <script>
+    const statusNode = document.getElementById('status');
+    document.getElementById('export').addEventListener('click', () => {
+      statusNode.className = ''; statusNode.textContent = 'Подготовка дерева слоёв…';
+      parent.postMessage({ pluginMessage: { type: 'EXPORT_SELECTED' } }, '*');
+    });
+    let exportedName = 'figma-layout.json';
+    document.getElementById('close').addEventListener('click', () => parent.postMessage({ pluginMessage: { type: 'CLOSE' } }, '*'));
+    document.getElementById('download').addEventListener('click', () => {
+      const blob = new Blob([document.getElementById('json').value], { type: 'application/json;charset=utf-8' });
+      const url = URL.createObjectURL(blob); const anchor = document.createElement('a'); anchor.href = url; anchor.download = exportedName; anchor.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    });
+    document.getElementById('copy').addEventListener('click', async () => {
+      const raw = document.getElementById('json').value;
+      try { await navigator.clipboard.writeText(raw); statusNode.className = 'ok'; statusNode.textContent = 'JSON скопирован в буфер обмена.'; }
+      catch { const textarea = document.getElementById('json'); textarea.focus(); textarea.select(); statusNode.className = ''; statusNode.textContent = 'Выделите JSON вручную и скопируйте его.'; }
+    });
+    window.onmessage = (event) => {
+      const message = event.data?.pluginMessage;
+      if (!message) return;
+      if (message.type === 'ERROR') { statusNode.className = 'error'; statusNode.textContent = message.message; return; }
+      if (message.type !== 'EXPORT_READY') return;
+      exportedName = message.filename || exportedName;
+      document.getElementById('json').value = message.json || '';
+      document.getElementById('result').style.display = 'block';
+      const sizeMb = (Number(message.bytes || 0) / (1024 * 1024)).toFixed(2);
+      statusNode.className = 'ok'; statusNode.textContent = `Экспортировано: ${message.frames} Frame, ${message.nodes} слоёв, ${message.assets || 0} PNG-слоёв и ${message.referenceImages || 0} PNG-эталонов (${sizeMb} МБ). JSON готов к импорту в Layout Generator → Figma JSON.`;
+    };
+  </script>
+</body>
+</html>

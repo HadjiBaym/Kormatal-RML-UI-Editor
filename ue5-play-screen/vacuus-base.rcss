@@ -1,0 +1,46 @@
+/* Minimal UA defaults; keep this screen self-contained in the project DevUI root. */
+@font-face {
+	font-family: "Onest";
+	font-weight: 400;
+	src: Play/fonts/Onest-Regular.ttf;
+}
+
+@font-face {
+	font-family: "Onest";
+	font-weight: 500;
+	src: Play/fonts/Onest-Medium.ttf;
+}
+
+@font-face {
+	font-family: "Onest";
+	font-weight: 700;
+	src: Play/fonts/Onest-Bold.ttf;
+}
+
+@font-face {
+	font-family: "Inter";
+	font-weight: 400;
+	src: Play/fonts/Inter-Regular.ttf;
+}
+
+body,
+div,
+p,
+header,
+nav,
+span {
+	display: block;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	font-family: "Onest";
+	font-size: 16dp;
+	color: #ffffff;
+}
+
+img {
+	display: block;
+}

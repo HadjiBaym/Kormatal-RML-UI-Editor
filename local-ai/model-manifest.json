@@ -1,0 +1,21 @@
+{
+  "name": "Qwen3-VL-2B-Instruct-GGUF",
+  "license": "Apache-2.0 (as declared in upstream model repository metadata)",
+  "runtime": "llama.cpp official Windows x64 b11711 direct HTTPS release asset; no cloud inference or metadata API call; loopback-only inference",
+  "files": [
+    {
+      "path": "models/Qwen3VL-2B-Instruct-Q4_K_M.gguf",
+      "sizeApproxBytes": 1110000000,
+      "sha256": "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+      "url": "https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct-GGUF/resolve/main/Qwen3VL-2B-Instruct-Q4_K_M.gguf"
+    },
+    {
+      "path": "models/mmproj-Qwen3VL-2B-Instruct-Q8_0.gguf",
+      "sizeApproxBytes": 445000000,
+      "sha256": "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+      "url": "https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct-GGUF/resolve/main/mmproj-Qwen3VL-2B-Instruct-Q8_0.gguf"
+    }
+  ],
+  "offlineRuntime": "After initial download, model inference reads only local files and listens on 127.0.0.1:8081; no cloud inference or API key.",
+  "runtimeRelease": "b11711"
+}

@@ -1,0 +1,216 @@
+@import "tailwindcss";
+
+@font-face { font-family: "Onest"; src: url("/fonts/Onest-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Onest"; src: url("/fonts/Onest-Medium.ttf") format("truetype"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Onest"; src: url("/fonts/Onest-SemiBold.ttf") format("truetype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Onest"; src: url("/fonts/Onest-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Onest"; src: url("/fonts/Onest-ExtraBold.ttf") format("truetype"); font-weight: 800; font-style: normal; font-display: swap; }
+
+@font-face { font-family: "Tektur"; src: url("/fonts/Tektur-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Tektur"; src: url("/fonts/Tektur-Medium.ttf") format("truetype"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Tektur"; src: url("/fonts/Tektur-SemiBold.ttf") format("truetype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Tektur"; src: url("/fonts/Tektur-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Tektur"; src: url("/fonts/Tektur-ExtraBold.ttf") format("truetype"); font-weight: 800; font-style: normal; font-display: swap; }
+
+@font-face { font-family: "JetBrains Mono"; src: url("/fonts/JetBrainsMono-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "JetBrains Mono"; src: url("/fonts/JetBrainsMono-Medium.ttf") format("truetype"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "JetBrains Mono"; src: url("/fonts/JetBrainsMono-SemiBold.ttf") format("truetype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "JetBrains Mono"; src: url("/fonts/JetBrainsMono-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "JetBrains Mono"; src: url("/fonts/JetBrainsMono-ExtraBold.ttf") format("truetype"); font-weight: 800; font-style: normal; font-display: swap; }
+
+@theme {
+  --font-sans: "Onest";
+  --font-mono: "JetBrains Mono";
+}
+
+html, body, #root { min-height: 100%; font-family: "Onest"; font-weight: 400; }
+code, pre, kbd, samp { font-family: "JetBrains Mono"; }
+
+/* --------------------------------------------------------------------------
+   UI/UX hardening (v36)
+   Prevent flex/grid intrinsic sizing from pushing labels outside controls,
+   make keyboard focus visible and keep dense desktop panels responsive.
+   -------------------------------------------------------------------------- */
+:root {
+  color-scheme: dark;
+  --ui-border: #27272a;
+  --ui-surface: #09090b;
+  --ui-surface-raised: #18181b;
+  --ui-focus: #22d3ee;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+button, input, select, textarea { min-width: 0; max-width: 100%; }
+button { line-height: 1.35; }
+button svg, [role="button"] svg { flex: 0 0 auto; }
+
+.app-shell button {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.app-shell button > span,
+.app-shell button > strong,
+.app-shell button > em {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.app-shell .flex > :not(svg),
+.app-shell .inline-flex > :not(svg),
+.app-shell .grid > * {
+  min-width: 0;
+}
+.app-shell p,
+.app-shell h1,
+.app-shell h2,
+.app-shell h3,
+.app-shell h4,
+.app-shell label,
+.app-shell code,
+.app-shell pre,
+.app-shell small {
+  overflow-wrap: anywhere;
+}
+.app-shell input,
+.app-shell select,
+.app-shell textarea {
+  min-height: 2rem;
+}
+.app-shell :focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 2px;
+}
+.app-shell button:disabled {
+  cursor: not-allowed;
+  filter: saturate(.65);
+}
+.app-shell .app-header button:not(:disabled):active,
+.app-shell .workspace-toolbar button:not(:disabled):active,
+.app-shell .preview-toolbar button:not(:disabled):active,
+.app-shell .modal-footer-actions button:not(:disabled):active,
+.app-shell .diagnostic-heading-actions button:not(:disabled):active { transform: translateY(1px); }
+.app-shell .safe-wrap { min-width: 0; overflow-wrap: anywhere; word-break: normal; }
+.app-shell .ui-modal-panel {
+  min-width: 0;
+  max-width: calc(100vw - 1rem);
+  max-height: calc(100dvh - 1rem);
+}
+.app-shell .ui-modal-body {
+  min-height: 0;
+  overscroll-behavior: contain;
+}
+.app-shell .project-tree-sidebar,
+.app-shell .diagnostics-sidebar,
+.app-shell .app-center-column,
+.app-shell .workspace-main-panels,
+.app-shell .workspace-editor-pane,
+.app-shell .workspace-preview-pane {
+  min-width: 0;
+  min-height: 0;
+}
+.app-shell .project-tree-sidebar { flex: 0 0 15rem; }
+.app-shell .diagnostics-sidebar { flex: 0 0 auto; }
+.app-shell .preview-toolbar-group { min-width: 0; max-width: 100%; }
+.app-shell .preview-toolbar select { min-width: 0; max-width: min(100%, 18rem); }
+.app-shell .app-header button,
+.app-shell .workspace-toolbar button,
+.app-shell .preview-toolbar button,
+.app-shell .sidebar-header-actions button,
+.app-shell .modal-footer-actions button { min-height: 2rem; }
+.app-shell .sidebar-header-actions button { min-width: 2rem; justify-content: center; }
+.app-shell .modal-footer-actions button { min-height: 2.25rem; }
+.app-shell .project-file-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.app-shell .horizontal-scroll-tabs { display: flex; flex-wrap: nowrap; overflow-x: auto; overscroll-behavior-x: contain; }
+.app-shell .horizontal-scroll-tabs button { flex: 0 0 auto; white-space: nowrap; overflow-wrap: normal; }
+.app-shell .horizontal-scroll-tabs button > span { white-space: nowrap; overflow-wrap: normal; }
+.app-shell .diagnostic-heading-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .375rem; min-width: 0; }
+
+/* Scrollable regions shrink within flex columns rather than extending the page. */
+.app-shell .overflow-y-auto,
+.app-shell .overflow-auto,
+.app-shell .overflow-scroll { overscroll-behavior: contain; scrollbar-gutter: stable; }
+.app-shell ::-webkit-scrollbar { width: 9px; height: 9px; }
+.app-shell ::-webkit-scrollbar-track { background: #09090b; }
+.app-shell ::-webkit-scrollbar-thumb { background: #3f3f46; border: 2px solid #09090b; border-radius: 999px; }
+.app-shell ::-webkit-scrollbar-thumb:hover { background: #52525b; }
+
+@media (max-width: 1360px) {
+  .app-shell .project-tree-sidebar { flex-basis: 13rem; }
+  .app-shell .diagnostics-sidebar:not(.is-collapsed) { width: 17rem; }
+  .app-shell .app-header { padding-inline: .75rem; gap: .5rem; }
+  .app-shell .workspace-toolbar { flex-wrap: wrap; align-items: flex-start; }
+  .app-shell .workspace-status { flex: 1 1 100%; max-width: 100%; flex-wrap: wrap; }
+  .app-shell .workspace-status > span { min-width: 0; overflow-wrap: anywhere; }
+  .app-shell .preview-toolbar > .preview-toolbar-group { flex-wrap: wrap; }
+}
+
+@media (max-width: 1120px) {
+  .app-shell .project-tree-sidebar { flex-basis: 11.5rem; }
+  .app-shell .diagnostics-sidebar:not(.is-collapsed) { width: 15rem; }
+  .app-shell .workspace-main-panels { flex-direction: column; overflow-y: auto; }
+  .app-shell .workspace-editor-pane,
+  .app-shell .workspace-preview-pane { flex: 1 0 50%; min-height: 300px; }
+  .app-shell .workspace-preview-pane { border-left: 0; border-top: 1px solid var(--ui-border); }
+  .app-shell .preview-toolbar { align-items: flex-start; }
+  .app-shell .preview-toolbar > div { flex-wrap: wrap; }
+  .app-shell [class~="text-[8px]"],
+  .app-shell [class~="text-[9px]"] { font-size: 10px !important; }
+}
+
+@media (max-width: 860px) {
+  .app-shell .project-tree-sidebar { flex-basis: 10.5rem; }
+  .app-shell .project-tree-sidebar .sidebar-footer-actions { display: none; }
+  .app-shell .project-tree-sidebar .sidebar-header { flex-wrap: wrap; padding: .5rem; }
+  .app-shell .project-tree-sidebar .sidebar-title-text { width: 100%; }
+  .app-shell .project-tree-sidebar .sidebar-header-actions { flex-direction: row; }
+  .app-shell .app-header { align-items: flex-start; }
+  .app-shell .app-header-brand { flex: 1 1 100%; }
+  .app-shell .app-header-project { flex: 1 1 100%; }
+  .app-shell .app-header-actions { width: 100%; justify-content: flex-start; }
+  .app-shell .workspace-view-modes { flex-wrap: wrap; max-width: 100%; }
+  .app-shell .workspace-view-modes button { flex: 1 1 auto; }
+  .app-shell .diagnostics-sidebar:not(.is-collapsed) { width: 13rem; }
+  .app-shell .ui-modal-panel { border-radius: .75rem; }
+  .app-shell .visual-review-grid { grid-template-rows: minmax(0, 1fr) minmax(0, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .app-shell .export-modal-layout { flex-direction: column; overflow-y: auto; }
+  .app-shell .export-file-tree { width: 100%; max-height: 30dvh; flex: 0 0 auto; border-right: 0; border-bottom: 1px solid var(--ui-border); }
+  .app-shell .export-modal-layout > :last-child { min-height: 18rem; flex: 1 0 18rem; }
+  .app-shell .project-tree-sidebar { flex-basis: 9rem; }
+  .app-shell .app-workspace { position: relative; }
+  .app-shell .diagnostics-sidebar.is-collapsed { display: flex; width: 2rem; flex-basis: 2rem; }
+  .app-shell .diagnostics-sidebar:not(.is-collapsed) { position: absolute; z-index: 40; top: 0; right: 0; bottom: 0; width: min(86vw, 20rem); box-shadow: -16px 0 32px rgb(0 0 0 / .35); }
+  .app-shell .workspace-toolbar { padding-inline: .5rem; }
+  .app-shell .workspace-status { font-size: 10px; }
+  .app-shell .workspace-main-panels { min-height: 0; }
+  .app-shell .workspace-editor-pane,
+  .app-shell .workspace-preview-pane { flex-basis: 70%; min-height: 280px; }
+  .app-shell .ui-modal-panel { max-width: calc(100vw - .5rem); max-height: calc(100dvh - .5rem); }
+  .app-shell .modal-footer-actions { display: flex; flex-wrap: wrap; }
+  .app-shell .modal-footer-actions button { flex: 1 1 auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-shell *, .app-shell *::before, .app-shell *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+
